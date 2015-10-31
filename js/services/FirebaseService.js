@@ -25,8 +25,8 @@ class FirebaseService {
 		return this.getAppsRef().child(appId)
 	}
 
-	getUserApps(cb) {
-		this.getAppsRef().on("value", cb);
+	getUserApps(cb, cbErr) {
+		this.getAppsRef().on("value", cb, cbErr);
 	}
 
 	addUserApp(data, cb) {
@@ -53,7 +53,9 @@ class FirebaseService {
 				if (!nodeId)return;
 				this.ref.child("events").child(nodeId).on("child_added", (snap)=> {
 					cb(nodeId, snap.key(), snap.val());
-					snap.ref().remove();
+
+					//TODO: enable me after final debug
+					//snap.ref().remove();
 				});
 			}
 		})

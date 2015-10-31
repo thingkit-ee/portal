@@ -1,14 +1,14 @@
 class ThingkitApplicationsController extends Controller {
 
 	static get $inject() {
-		return ['$scope', '$routeParams', 'firebase', '$uibModal', '$timeout'];
+		return ['$scope', '$routeParams', 'firebase', '$uibModal', '$timeout', '$location'];
 	}
 
-	constructor($scope, $routeParams, firebase, $uibModal, $timeout) {
+	constructor($scope, $routeParams, firebase, $uibModal, $timeout, $location) {
 		super($scope);
 		this.firebase = firebase;
 		this.$uibModal = $uibModal;
-		firebase.getUserApps(snapshot=> $timeout(()=>$scope.apps = snapshot.val()));
+		firebase.getUserApps(snapshot=> $timeout(()=>$scope.apps = snapshot.val()), (e)=>$timeout($location.path("/login")));
 	}
 
 	addApp() {

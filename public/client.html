@@ -10,14 +10,16 @@
 <body>
 <div ng-controller="ClientController">
 
-	<br ng-if="lastEventNode">
+	<div ng-if="BAG_STOLEN">
+		<img src="https://media.giphy.com/media/NIY4hibxe63Uk/giphy.gif">
+	</div>
+
+	<div ng-if="lastEventNode">
 		lastEventNode: {{lastEventNode}}
 		<br/>
 		lastEvent: {{lastEvent|json}}
 	</div>
-	<div ng-if="BAG_STOLEN">
-		<img src="https://media.giphy.com/media/NIY4hibxe63Uk/giphy.gif">
-	</div>
+</div>
 
 </div>
 </body>
