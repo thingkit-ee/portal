@@ -11,23 +11,26 @@ var DataScrapper = function() {
 
             appsRef.once("value", function(appsRaw) {
                 var apps = appsRaw.val();
-                for (var appKey in apps) {
-                    var app = apps[appKey];
-                    for (var nodeKey in app.nodes) {
-                        var node = app.nodes[nodeKey];
-                        console.log("Current node: " + JSON.stringify(node));
-                        self.retrieve(node.lastReceivedData, appKey, nodeKey, node.id, function (lastReceivedData, appKey, nodeKey) {
-                            console.log("New Last data retrieved:" + lastReceivedData);
-                            self.rootFirebase.child('apps/' + appKey + "/nodes/" + nodeKey).update({
-                                lastReceivedData: lastReceivedData
+                for (var userId in apps) {
+                    var userApps = apps[userId];
+                    for (var appKey in userApps) {
+                        var app = userApps[appKey];
+                        for (var nodeKey in app.nodes) {
+                            var node = app.nodes[nodeKey];
+                            console.log("Current node: " + JSON.stringify(node));
+                            self.retrieve(node.lastReceivedData, userId, appKey, nodeKey, node.id, function (lastReceivedData, userId, appKey, nodeKey) {
+                                console.log("New Last data retrieved:" + lastReceivedData);
+                                self.rootFirebase.child('apps/' + userId + "/" + appKey + "/nodes/" + nodeKey).update({
+                                    lastReceivedData: lastReceivedData
+                                });
                             });
-                        });
+                        }
                     }
                 }
             });
         },
 
-        retrieve: function(lastReceivedData, appKey, nodeKey, nodeId, callback) {
+        retrieve: function(lastReceivedData, userId, appKey, nodeKey, nodeId, callback) {
             var self = this;
             console.log("Retrieving data for node: " + nodeId);
             var url = "http://thethingsnetwork.org/api/v0/nodes/" + nodeId + "?limit=100";
@@ -54,7 +57,7 @@ var DataScrapper = function() {
                     })
 
                     console.log('Filtered size: ' + filteredData.length);
-                    callback(newestEventDate, appKey, nodeKey);
+                    callback(newestEventDate, userId, appKey, nodeKey);
                 }
             })
         }
@@ -62,7 +65,7 @@ var DataScrapper = function() {
 }
 
 exports.init = function (rootFirebase) {
-    var job = new CronJob('*/5 * * * * *',
+    var job = new CronJob('*/1 * * * * *',
         function() {
             console.log("Periodical polling job started: " + new Date());
             var dataScrapper = new DataScrapper();

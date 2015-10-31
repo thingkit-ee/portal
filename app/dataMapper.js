@@ -3,16 +3,18 @@ exports.init = function (rootFirebase) {
 
     console.log("Register listener for event:" + multiSensorNodeId)
     rootFirebase.child('events/' + multiSensorNodeId).on("child_added", function(snapshot, prevChildKey) {
-        console.log("Event for :" + multiSensorNodeId + " was added");
+        console.log("Event for node " + multiSensorNodeId + " was added with data: " + snapshot.val().data_plain);
 
         var data;
         try {
-            data = JSON.parse(snapshot.data_plain);
+            data = eval("(" + snapshot.val().data_plain + ")");
         } catch(e) {
             console.error(e)
         }
 
         if (!data) return;
+        console.log("Event data " + JSON.stringify(data));
+
         rootFirebase.child('events/' + multiSensorNodeId).once("value", function(rows) {
             console.log("Update row count: " + rows.numChildren());
             rootFirebase.child('chart').update({
@@ -20,8 +22,7 @@ exports.init = function (rootFirebase) {
             });
         });
 
-
-        if (!data.A) {
+        if (data.A) {
             rootFirebase.child('chart').update({
                 bendSensor: data.A
             });
