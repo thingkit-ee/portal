@@ -1,7 +1,7 @@
 {
   "name": "Thing Web",
   "description": "Web server for IOT",
-  "repository": "https://github.com/heroku/node-js-getting-started",
+  "repository": "https://github.com/thingkit-ee/portal",
   "logo": "http://node-js-sample.herokuapp.com/node.svg",
   "keywords": ["node", "express", "static"],
   "image": "heroku/nodejs"
