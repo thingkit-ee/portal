@@ -1,6 +1,7 @@
 var Firebase = require("firebase");
 var express = require('express');
 var gatewayPoller = require('./app/gatewayPoller.js');
+var dataMapper = require('./app/dataMapper.js');
 var app = express();
 
 var rootFirebase = new Firebase("https://thingkit.firebaseio.com/");
@@ -13,6 +14,7 @@ rootFirebase.authWithCustomToken('1U46cpva90E1oa8rqdiQMEnqg89Vefjc7NW7QIph', fun
 });
 
 gatewayPoller.init(rootFirebase);
+dataMapper.init(rootFirebase);
 
 app.set('port', (process.env.PORT || 5000));
 

@@ -16,7 +16,7 @@ var DataScrapper = function() {
                     for (var nodeKey in app.nodes) {
                         var node = app.nodes[nodeKey];
                         console.log("Current node: " + JSON.stringify(node));
-                        self.retrieve(node.lastReceivedData, appKey, nodeKey, node.name, function (lastReceivedData, appKey, nodeKey) {
+                        self.retrieve(node.lastReceivedData, appKey, nodeKey, node.id, function (lastReceivedData, appKey, nodeKey) {
                             console.log("New Last data retrieved:" + lastReceivedData);
                             self.rootFirebase.child('apps/' + appKey + "/nodes/" + nodeKey).update({
                                 lastReceivedData: lastReceivedData
