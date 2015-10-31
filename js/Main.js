@@ -5,7 +5,7 @@ class Main {
 			.config(['$routeProvider', ($routeProvider) => {
 				$routeProvider
 					.when('/start', {
-						template: "{{getHello()}}",
+						templateUrl: "/partials/login.html",
 						controller: 'ThingkitController'
 					})
 					.otherwise({
