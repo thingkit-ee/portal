@@ -1,18 +1,59 @@
 <div>
-	{{getAuth()|json}}
-	<img ng-src="{{getAuth().profileImageURL}}"/>
 
-	<div ng-repeat="(appId, app) in apps">
-		<button class="btn btn-danger" ng-click="removeApp(appId)">Remove app</button>
-		{{app.name}}
-		<div ng-repeat="(nodeId, node) in app.nodes">
-			{{node.name}}
-			<button class="btn btn-danger" ng-click="removeNodeApp(appId,nodeId)">Remove node</button>
+
+	<div class="container">
+		<h1 class="text-center login-title">
+			<img src="/assets/thingkit_464x164.jpg"/>
+		</h1>
+		<div class="avatar">
+			<div class="card hovercard">
+				<div class="cardheader"></div>
+
+				<div class="avatar">
+					<img ng-src="{{getAuth().profileImageURL}}"/>
+				</div>
+				<div class="info">
+					<div class="title">
+						<a>{{getAuth().email}}</a>
+					</div>
+					<a class="desc" ng-click="logout()">
+						logout
+					</a>
+
+				</div>
+			</div>
 		</div>
-		<button class="btn btn-primary" ng-click="addNodeApp(appId)">Add node</button>
+
+		<table class="table table-striped custab">
+			<thead>
+			<a class="btn btn-primary btn-xs pull-right" ng-click="addApp()"><b>+</b> Add new app</a>
+			</thead>
+			<tbody ng-repeat="(appId, app) in apps">
+			<tr>
+				<td>{{appId}}</td>
+				<td>{{app.name}}</td>
+				<td class="text-center">
+					<a class='btn btn-info btn-xs' ng-click="addNodeApp(appId)">
+						<span class="glyphicon glyphicon-edit"></span> Add node
+					</a>
+					<a class="btn btn-danger btn-xs" ng-click="removeApp(appId)">
+						<span class="glyphicon glyphicon-remove"></span> Remove app
+					</a>
+				</td>
+			</tr>
+			<tr ng-repeat="(nodeId, node) in app.nodes">
+				<td>{{node.id}}</td>
+				<td>{{node.name}}</td>
+				<td class="text-center">
+					<a class="btn btn-danger btn-xs" ng-click="removeNodeApp(appId, nodeId)">
+						<span class="glyphicon glyphicon-remove"></span> Remove node
+					</a>
+				</td>
+			</tr>
+			</tbody>
+		</table>
 	</div>
 
-	<button class="btn btn-primary" ng-click="addApp()">Add app</button>
 
 	<script type="text/ng-template" id="addApp.tpl">
 		<div class="modal-header">
