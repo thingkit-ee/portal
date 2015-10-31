@@ -9,16 +9,13 @@ class FirebaseService {
 	}
 
 	authWithPassword(credentials, cb) {
-		this.ref.authWithPassword(credentials, (error, authData) => {
-			if (!error) {
-				this.auth = authData;
-				console.log(this.auth);
-			}
-			cb(error, authData);
-		});
+		this.ref.authWithPassword(credentials, cb);
 	}
 
 	getAppsRef() {
+		if (!this.auth) {
+			this.auth = this.ref.getAuth();
+		}
 		return this.ref.child("apps").child(this.auth.uid)
 	}
 
