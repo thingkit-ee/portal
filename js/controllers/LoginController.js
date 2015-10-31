@@ -18,6 +18,7 @@ class LoginController extends Controller {
 				this.$scope.$apply();
 			} else {
 				this.$location.path("/apps");
+				this.$scope.$apply();
 			}
 		});
 	}
