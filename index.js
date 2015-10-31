@@ -1,6 +1,18 @@
 var Firebase = require("firebase");
 var express = require('express');
+var gatewayPoller = require('./app/gatewayPoller.js');
 var app = express();
+
+var rootFirebase = new Firebase("https://thingkit.firebaseio.com/");
+rootFirebase.authWithCustomToken('1U46cpva90E1oa8rqdiQMEnqg89Vefjc7NW7QIph', function(error, authData) {
+    if (error) {
+        console.log("Login Failed!", error);
+    } else {
+        console.log("Login Succeeded!", authData);
+    }
+});
+
+gatewayPoller.init(rootFirebase);
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -18,14 +30,7 @@ app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
-var rootFirebase = new Firebase("https://thingkit.firebaseio.com/app/data");
-rootFirebase.authWithCustomToken('1U46cpva90E1oa8rqdiQMEnqg89Vefjc7NW7QIph', function(error, authData) {
-    if (error) {
-        console.log("Login Failed!", error);
-    } else {
-        console.log("Login Succeeded!", authData);
-    }
-});
+
 
 app.get('/data', function(request, response) {
     var usersRef = rootFirebase.child('users');

@@ -8,6 +8,7 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "cron": "^1.0.9",
     "ejs": "2.3.3",
     "express": "4.13.3",
     "firebase": "^2.3.1",
