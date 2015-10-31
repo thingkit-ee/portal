@@ -42,16 +42,17 @@ var DataScrapper = function() {
                     var data = JSON.parse(body)
 
                     console.log('Size: ' + data.length);
+                    console.log('Last recorded event date: ' + lastReceivedData);
                     var filteredData = data.filter(function(el) {
-                        return new Date(el.time) > lastReceivedData
+                        return new Date(el.time).getTime() > new Date(lastReceivedData).getTime()
                     })
 
-                    var newestEventDate = lastReceivedData;
+                    var newestEventDate = new Date(lastReceivedData);
                     filteredData.forEach(function(event) {
                         var events = self.rootFirebase.child('events/' + nodeId);
                         events.push(event);
                         var eventDate = new Date(event.time);
-                        if (eventDate > newestEventDate) {
+                        if (eventDate.getTime() > newestEventDate.getTime()) {
                             newestEventDate = eventDate;
                         }
                     })
@@ -65,7 +66,7 @@ var DataScrapper = function() {
 }
 
 exports.init = function (rootFirebase) {
-    var job = new CronJob('*/1 * * * * *',
+    var job = new CronJob('*/10 * * * * *',
         function() {
             console.log("Periodical polling job started: " + new Date());
             var dataScrapper = new DataScrapper();
