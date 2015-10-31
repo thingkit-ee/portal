@@ -17,28 +17,46 @@ class FirebaseService {
 		});
 	}
 
-	get appsRef() {
+	getAppsRef() {
 		return this.ref.child("apps")
 	}
 
+	getAppRef(appId) {
+		return this.getAppsRef().child(appId)
+	}
+
 	getUserApps(cb) {
-		this.appsRef.on("value", cb);
+		this.getAppsRef().on("value", cb);
 	}
 
 	addUserApp(data, cb) {
-		this.appsRef.push(data, cb);
+		this.getAppsRef().push(data, cb);
 	}
 
 	removeApp(appId, cb) {
-		this.appsRef.child(appId).remove(cb);
+		this.getAppRef(appId).remove(cb);
 	}
 
 	addNodeUserApp(appId, data, cb) {
-		this.appsRef.child(appId).child('nodes').push(data, cb);
+		this.getAppRef(appId).child('nodes').push(data, cb);
 	}
 
 	removeNodeUserApp(appId, nodeId, cb) {
-		this.appsRef.child(appId).child('nodes').child(nodeId).remove(cb);
+		this.getAppRef(appId).child('nodes').child(nodeId).remove(cb);
+	}
+
+	waitInput(appId, cb) {
+		this.getAppRef(appId).child('nodes').on("value", (snap)=> {
+			var nodes = snap.val();
+			for (var nodeKey in nodes) {
+				var nodeId = nodes[nodeKey].id;
+				if (!nodeId)return;
+				this.ref.child("events").child(nodeId).on("child_added", (snap)=> {
+					cb(nodeId, snap.key(), snap.val());
+					snap.ref().remove();
+				});
+			}
+		})
 	}
 
 }
