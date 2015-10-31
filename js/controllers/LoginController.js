@@ -16,7 +16,7 @@ class LoginController extends Controller {
 	}
 
 	loginFb() {
-		this.firebase.authWithFacebook(this.onAuth)
+		this.firebase.authWithFacebook(this.onAuth.bind(this))
 	}
 
 	onAuth(error, authData) {
