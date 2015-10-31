@@ -49,4 +49,10 @@ class ThingkitApplicationsController extends Controller {
 		this.firebase.removeNodeApp(appId, nodeId);
 	}
 
+	getAuth() {
+		let _auth = this.firebase.auth;
+		return _auth[_auth.provider];
+	}
+
+
 }

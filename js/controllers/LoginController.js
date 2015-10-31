@@ -12,14 +12,19 @@ class LoginController extends Controller {
 
 	login() {
 		this.$scope.loginError = null;
-		this.firebase.authWithPassword(this.$scope.credentials, (error, authData) => {
-			if (error) {
-				this.$scope.loginError = error;
-				this.$scope.$apply();
-			} else {
-				this.$location.path("/apps");
-				this.$scope.$apply();
-			}
-		});
+		this.firebase.authWithPassword(this.$scope.credentials, this.onAuth);
+	}
+
+	loginFb() {
+		this.firebase.authWithFacebook(this.onAuth)
+	}
+
+	onAuth(error, authData) {
+		if (error) {
+			this.$scope.loginError = error;
+		} else {
+			this.$location.path("/apps");
+		}
+		this.$scope.$apply();
 	}
 }

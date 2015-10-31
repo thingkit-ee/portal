@@ -7,13 +7,22 @@
 
 			<div class="account-wall">
 				<p class="bg-danger">{{loginError.message}}</p>
+
 				<form class="form-signin" ng-submit="login()">
-					<input type="text" class="form-control" placeholder="Email" required autofocus ng-model="credentials.email">
-					<input type="password" class="form-control" placeholder="Password" required ng-model="credentials.password">
+					<input type="text" class="form-control" placeholder="Email" required autofocus
+						   ng-model="credentials.email">
+					<input type="password" class="form-control" placeholder="Password" required
+						   ng-model="credentials.password">
 					<button class="btn btn-lg btn-primary btn-block" type="submit">
 						Sign in
 					</button>
 				</form>
+
+				<h1 class="text-center login-title" ng-click="loginFb()">
+					<a class="btn btn-social btn-facebook btn-lg">
+						<i class="fa fa-facebook"></i> Sign in with Facebook
+					</a>
+				</h1>
 			</div>
 		</div>
 	</div>
