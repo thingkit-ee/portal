@@ -45,4 +45,8 @@ class ThingkitApplicationsController extends Controller {
 		});
 	}
 
+	removeNodeApp(appId, nodeId) {
+		this.firebase.removeNodeApp(appId, nodeId);
+	}
+
 }

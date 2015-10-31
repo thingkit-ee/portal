@@ -17,25 +17,28 @@ class FirebaseService {
 		});
 	}
 
+	get appsRef() {
+		return this.ref.child("apps")
+	}
+
 	getUserApps(cb) {
-		this.ref.child("apps").on("value", cb);
+		this.appsRef.on("value", cb);
 	}
 
 	addUserApp(data, cb) {
-		this.ref.child("apps").push(data, cb);
+		this.appsRef.push(data, cb);
 	}
 
 	removeApp(appId, cb) {
-		this.ref.child("apps").child(appId).remove(cb);
+		this.appsRef.child(appId).remove(cb);
 	}
 
 	addNodeUserApp(appId, data, cb) {
-		var nodeRef = this.ref.child("node").push(data, (error)=> {
-			if (error) {
-				return;
-			}
-			this.ref.child("apps").child(appId).child('nodes').push(nodeRef.key());
-		});
+		this.appsRef.child(appId).child('nodes').push(data, cb);
+	}
+
+	removeNodeUserApp(appId, nodeId, cb) {
+		this.appsRef.child(appId).child('nodes').child(nodeId).remove(cb);
 	}
 
 }

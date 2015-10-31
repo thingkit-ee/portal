@@ -2,9 +2,9 @@
 	<div ng-repeat="(appId, app) in apps">
 		<button class="btn btn-danger" ng-click="removeApp(appId)">Remove app</button>
 		{{app.name}}
-		<div ng-repeat="node in app.nodes">
-			{{node}}
-			<button class="btn btn-danger" ng-click="removeNodeApp()">Remove node</button>
+		<div ng-repeat="(nodeId, node) in app.nodes">
+			{{node.name}}
+			<button class="btn btn-danger" ng-click="removeNodeApp(appId,nodeId)">Remove node</button>
 		</div>
 		<button class="btn btn-primary" ng-click="addNodeApp(appId)">Add node</button>
 	</div>
