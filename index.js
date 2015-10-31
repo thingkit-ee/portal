@@ -51,6 +51,6 @@ app.get('/login', function(request, response) {
   );
 
   response.send('Token' + token)
-})
+});
 
 
