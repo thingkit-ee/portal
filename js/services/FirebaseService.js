@@ -12,6 +12,10 @@ class FirebaseService {
 		this.ref.authWithPassword(credentials, cb);
 	}
 
+	authWithFacebook(cb) {
+		this.ref.authWithOAuthPopup("facebook", cb);
+	};
+
 	getAppsRef() {
 		if (!this.auth) {
 			this.auth = this.ref.getAuth();

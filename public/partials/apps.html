@@ -1,4 +1,7 @@
 <div>
+	{{getAuth()|json}}
+	<img ng-src="{{getAuth().profileImageURL}}"/>
+
 	<div ng-repeat="(appId, app) in apps">
 		<button class="btn btn-danger" ng-click="removeApp(appId)">Remove app</button>
 		{{app.name}}
