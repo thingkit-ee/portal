@@ -1,4 +1,4 @@
-class Main {
+class Admin {
 	constructor() {
 		angular.module('thingkit', ['ngRoute', 'ui.bootstrap'])
 			.controller('ThingkitApplicationsController', ThingkitApplicationsController)
@@ -23,4 +23,4 @@ class Main {
 	}
 }
 
-new Main();
+new Admin();
