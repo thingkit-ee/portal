@@ -1,5 +1,42 @@
-<div ng-repeat="app in apps">
+<div>
+	<div ng-repeat="(appId, app) in apps">
+		<button class="btn btn-danger" ng-click="removeApp(appId)">Remove app</button>
+		{{app.name}}
+		<div ng-repeat="node in app.nodes">
+			{{node}}
+			<button class="btn btn-danger" ng-click="removeNodeApp()">Remove node</button>
+		</div>
+		<button class="btn btn-primary" ng-click="addNodeApp(appId)">Add node</button>
+	</div>
 
-	{{app|json}}
+	<button class="btn btn-primary" ng-click="addApp()">Add app</button>
+
+	<script type="text/ng-template" id="addApp.tpl">
+		<div class="modal-header">
+			<h3 class="modal-title">Add your application</h3>
+		</div>
+		<div class="modal-body">
+			<label>App name</label>
+			<input type="text" class="form-control" ng-model="app.name">
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary" type="button" ng-click="$close(app)">Add</button>
+			<button class="btn btn-warning" type="button" ng-click="$dismiss()">Cancel</button>
+		</div>
+	</script>
+
+	<script type="text/ng-template" id="addNodeApp.tpl">
+		<div class="modal-header">
+			<h3 class="modal-title">Add node to application</h3>
+		</div>
+		<div class="modal-body">
+			<label>Node name</label>
+			<input type="text" class="form-control" ng-model="node.name">
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary" type="button" ng-click="$close(node)">Add</button>
+			<button class="btn btn-warning" type="button" ng-click="$dismiss()">Cancel</button>
+		</div>
+	</script>
 
 </div>

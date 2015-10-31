@@ -1,6 +1,6 @@
 class Main {
 	constructor() {
-		angular.module('thingkit', ['ngRoute'])
+		angular.module('thingkit', ['ngRoute', 'ui.bootstrap'])
 			.controller('ThingkitApplicationsController', ThingkitApplicationsController)
 			.controller('LoginController', LoginController)
 			.service('firebase', FirebaseService)

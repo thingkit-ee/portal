@@ -13,7 +13,6 @@ class LoginController extends Controller {
 	login() {
 		this.$scope.loginError = null;
 		this.firebase.authWithPassword(this.$scope.credentials, (error, authData) => {
-			console.log(error, authData);
 			if (error) {
 				this.$scope.loginError = error;
 				this.$scope.$apply();
