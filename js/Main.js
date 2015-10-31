@@ -2,14 +2,20 @@ class Main {
 	constructor() {
 		angular.module('thingkit', ['ngRoute'])
 			.controller('ThingkitController', ThingkitController)
+			.controller('LoginController', LoginController)
+			.service('firebase', FirebaseService)
 			.config(['$routeProvider', ($routeProvider) => {
 				$routeProvider
-					.when('/start', {
+					.when('/login', {
 						templateUrl: "/partials/login.html",
-						controller: 'ThingkitController'
+						controller: 'LoginController'
+					})
+					.when('/login', {
+						templateUrl: "/partials/login.html",
+						controller: 'LoginController'
 					})
 					.otherwise({
-						redirectTo: '/start'
+						redirectTo: '/login'
 					});
 
 				//$locationProvider.html5Mode(true);

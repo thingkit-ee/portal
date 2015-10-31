@@ -4,7 +4,7 @@ var concat = require('gulp-concat');
 var less = require('gulp-less');
 
 gulp.task('buildJs', function () {
-	return gulp.src(['js/controllers/**/*.js', 'js/Mocks.js', 'js/Main.js', 'js/services/**/*.js'])
+	return gulp.src(['js/controllers/**/*.js','js/services/**/*.js', 'js/Main.js'])
 		.pipe(babel())
 		.pipe(concat('thingkit.min.js'))
 		.pipe(gulp.dest('public/js'));
@@ -18,7 +18,7 @@ gulp.task('buildCss', function () {
 });
 
 gulp.task('develop', function () {
-	gulp.watch('src/**/*.js', ['buildJs']);
+	gulp.watch('js/**/*.js', ['buildJs']);
 	gulp.watch('styles/**/*.less', ['buildCss']);
 });
 
