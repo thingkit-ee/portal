@@ -25,12 +25,18 @@
 		</div>
 
 		<table class="table table-striped custab">
+			<col width="25%">
+			<col width="15%">
+			<col width="35%">
+			<col width="20%">
+
 			<thead>
 			<a class="btn btn-primary btn-xs pull-right" ng-click="addApp()"><b>+</b> Add new app</a>
 			</thead>
 			<tbody ng-repeat="(appId, app) in apps">
 			<tr>
-				<td>{{appId}}</td>
+				<td>Application id: {{appId}}</td>
+				<td></td>
 				<td>{{app.name}}</td>
 				<td class="text-center">
 					<a class='btn btn-info btn-xs' ng-click="addNodeApp(appId)">
@@ -42,7 +48,8 @@
 				</td>
 			</tr>
 			<tr ng-repeat="(nodeId, node) in app.nodes">
-				<td>{{node.id}}</td>
+				<td></td>
+				<td>Node id: {{node.id}}</td>
 				<td>{{node.name}}</td>
 				<td class="text-center">
 					<a class="btn btn-danger btn-xs" ng-click="removeNodeApp(appId, nodeId)">
