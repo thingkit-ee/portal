@@ -12,7 +12,7 @@ class LoginController extends Controller {
 
 	login() {
 		this.$scope.loginError = null;
-		this.firebase.authWithPassword(this.$scope.credentials, this.onAuth);
+		this.firebase.authWithPassword(this.$scope.credentials, this.onAuth.bind(this));
 	}
 
 	loginFb() {
