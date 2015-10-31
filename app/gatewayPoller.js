@@ -30,7 +30,7 @@ var DataScrapper = function() {
         retrieve: function(lastReceivedData, appKey, nodeKey, nodeId, callback) {
             var self = this;
             console.log("Retrieving data for node: " + nodeId);
-            var url = "http://thethingsnetwork.org/api/v0/nodes/" + nodeId + "?limit=50";
+            var url = "http://thethingsnetwork.org/api/v0/nodes/" + nodeId + "?limit=100";
             if (!lastReceivedData) {
                 lastReceivedData = 0;
             }
