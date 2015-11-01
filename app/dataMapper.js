@@ -1,3 +1,5 @@
+var Slack = require('node-slackr');
+
 exports.init = function (rootFirebase) {
     var multiSensorNodeId = "000011BD";
 
@@ -29,5 +31,12 @@ exports.init = function (rootFirebase) {
 
             console.log("Update data for chart A: " + data.A)
         }
+    });
+
+
+    rootFirebase.child('events2').on("child_added", function(snapshot, prevChildKey) {
+        console.log("Event was added from gateway");
+        var slack = new Slack('https://hooks.slack.com/services/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');
+        slack.notify("You got mail!");
     });
 }
