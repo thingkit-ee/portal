@@ -26,7 +26,7 @@ class FirebaseService {
 		return this.getAppsRef().child(appId)
 	}
 
-	getUserApps(cb, cbErr) {
+	getApps(cb, cbErr) {
 		this.getAppsRef().on("value", cb, cbErr);
 	}
 
@@ -34,7 +34,7 @@ class FirebaseService {
 		this.ref.child("events").on("value", cb)
 	}
 
-	addUserApp(data, cb) {
+	addApp(data, cb) {
 		this.getAppsRef().push(data, cb);
 	}
 
@@ -42,11 +42,11 @@ class FirebaseService {
 		this.getAppRef(appId).remove(cb);
 	}
 
-	addNodeUserApp(appId, data, cb) {
+	addNodeApp(appId, data, cb) {
 		this.getAppRef(appId).child('nodes').push(data, cb);
 	}
 
-	removeNodeUserApp(appId, nodeId, cb) {
+	removeNodeApp(appId, nodeId, cb) {
 		this.getAppRef(appId).child('nodes').child(nodeId).remove(cb);
 	}
 

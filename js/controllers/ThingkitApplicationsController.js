@@ -10,25 +10,35 @@ class ThingkitApplicationsController extends Controller {
 		this.$uibModal = $uibModal;
 		this.$timeout = $timeout;
 		this.$location = $location;
-		firebase.getUserApps(snapshot=> $timeout(()=>$scope.apps = snapshot.val()), this.redirectToLogin.bind(this));
+		firebase.getApps(snapshot=> $timeout(()=>$scope.apps = snapshot.val()), this.redirectToLogin.bind(this));
 		firebase.getEvents(snapshot=> $timeout(()=> {
 			$scope.events = snapshot;
 
 			/*var x = snapshot.val()['000011BD'];
+			var arr = Object.keys(x).map(k => x[k])
+			arr.sort((a,b)=>new Date(a.time)< new b.time)*/
 
-			x = x.reduce((prev, current)=> {
-				if (+new Date(x.time) - (+new Date(x.time))) {
+			/*arr.reduce((prev, current)=> {
+			 if (!prev || !current) {
+			 return;
+			 }
+			 console.log(+new Date(prev.time) - (+new Date(current.time)));
 
-				}
-			});
+			 if (+new Date(prev.time) - (+new Date(current.time)) < 1000 * 60 * 30) {
+			 console.log(current, prev)
+			 }
+			 });*/
 
-			var labels = [];
+			/*var labels = [];
 			var data = [];
 			for (var i in x) {
-				labels.push(x[i].time);
-				data.push(+new Date(x[i].time))
+
 			}
 
+			arr.forEach((el)=> {
+				labels.push(el.time);
+				data.push(+new Date(el.time))
+			});
 
 			new Chartist.Line('.ct-chart', {
 				labels: labels,
@@ -57,7 +67,7 @@ class ThingkitApplicationsController extends Controller {
 			if (!app || !app.name) {
 				return;
 			}
-			this.firebase.addUserApp(app)
+			this.firebase.addApp(app)
 		});
 	}
 
@@ -76,7 +86,7 @@ class ThingkitApplicationsController extends Controller {
 			if (!node || !node.name) {
 				return;
 			}
-			this.firebase.addNodeUserApp(appId, node)
+			this.firebase.addNodeApp(appId, node)
 		});
 	}
 
