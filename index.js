@@ -3,6 +3,7 @@ var express = require('express');
 var gatewayPoller = require('./app/gatewayPoller.js');
 var dataMapper = require('./app/dataMapper.js');
 var gatewayEndpoint = require('./app/gatewayEndpoint.js');
+var http = require('http');
 var app = express();
 
 var rootFirebase = new Firebase("https://thingkit.firebaseio.com/");
@@ -29,11 +30,6 @@ app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
-app.get('/data', function(request, response) {
-    gatewayEndpoint.store(rootFirebase, request);
-    response.send('Profit!');
-});
-
 app.get('/login', function(request, response) {
   var FirebaseTokenGenerator = require("firebase-token-generator");
   var tokenGenerator = new FirebaseTokenGenerator("pvFPrznHD8GecmraJbDvQ7wwVaklEafFBxPkQFxs");
@@ -46,3 +42,7 @@ app.get('/login', function(request, response) {
 });
 
 
+http.createServer(function(request, response) {
+    gatewayEndpoint.store(rootFirebase, request);
+    response.send('Profit!');
+}).listen(4444);
