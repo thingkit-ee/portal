@@ -34,9 +34,11 @@ exports.init = function (rootFirebase) {
     });
 
 
-    rootFirebase.child('events2').on("child_added", function(snapshot, prevChildKey) {
+    rootFirebase.child('event2').on("child_added", function(snapshot, prevChildKey) {
         console.log("Event was added from gateway");
-        var slack = new Slack('https://hooks.slack.com/services/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');
+        console.log(snapshot.val());
+        if (snapshot.val().stat) return;
+        var slack = new Slack('https://hooks.slack.com/services/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');
         slack.notify("You got mail!");
     });
 }
