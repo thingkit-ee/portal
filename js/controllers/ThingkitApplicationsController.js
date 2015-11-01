@@ -11,6 +11,39 @@ class ThingkitApplicationsController extends Controller {
 		this.$timeout = $timeout;
 		this.$location = $location;
 		firebase.getUserApps(snapshot=> $timeout(()=>$scope.apps = snapshot.val()), this.redirectToLogin.bind(this));
+		firebase.getEvents(snapshot=> $timeout(()=> {
+			$scope.events = snapshot;
+
+			var x = snapshot.val()['000011BD'];
+
+			x = x.reduce((prev, current)=> {
+				if (+new Date(x.time) - (+new Date(x.time))) {
+
+				}
+			});
+
+			var labels = [];
+			var data = [];
+			for (var i in x) {
+				labels.push(x[i].time);
+				data.push(+new Date(x[i].time))
+			}
+
+
+			new Chartist.Line('.ct-chart', {
+				labels: labels,
+				series: [data]
+			}, {
+				fullWidth: true,
+				chartPadding: {
+					right: 40
+				}
+			});
+
+
+		}));
+
+
 	}
 
 	addApp() {

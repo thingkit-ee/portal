@@ -31,6 +31,10 @@ class FirebaseService {
 		this.getAppsRef().on("value", cb, cbErr);
 	}
 
+	getEvents(cb){
+		this.ref.child("events").on("value", cb)
+	}
+
 	addUserApp(data, cb) {
 		this.getAppsRef().push(data, cb);
 	}
