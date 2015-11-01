@@ -14,7 +14,7 @@ rootFirebase.authWithCustomToken('1U46cpva90E1oa8rqdiQMEnqg89Vefjc7NW7QIph', fun
         console.log("Login Succeeded!", authData);
 
         gatewayPoller.init(rootFirebase);
-        dataMapper.init(rootFirebase);
+        //dataMapper.init(rootFirebase);
     }
 });
 
