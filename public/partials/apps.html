@@ -1,10 +1,13 @@
 <div>
 
 
+	<div class="ct-chart"></div>
+
 	<div class="container">
 		<h1 class="text-center login-title">
 			<img src="/assets/thingkit_464x164.jpg"/>
 		</h1>
+
 		<div class="avatar">
 			<div class="card hovercard">
 				<div class="cardheader"></div>
@@ -50,7 +53,9 @@
 			<tr ng-repeat="(nodeId, node) in app.nodes">
 				<td></td>
 				<td>Node id: {{node.id}}</td>
-				<td>{{node.name}}</td>
+				<td>{{node.name}}
+					<span class="badge" style="background-color: #398439">{{events.child(node.id).numChildren()}}</span>
+				</td>
 				<td class="text-center">
 					<a class="btn btn-danger btn-xs" ng-click="removeNodeApp(appId, nodeId)">
 						<span class="glyphicon glyphicon-remove"></span> Remove node
