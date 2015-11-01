@@ -30,19 +30,6 @@ app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
-app.get('/login', function(request, response) {
-  var FirebaseTokenGenerator = require("firebase-token-generator");
-  var tokenGenerator = new FirebaseTokenGenerator("pvFPrznHD8GecmraJbDvQ7wwVaklEafFBxPkQFxs");
-  var token = tokenGenerator.createToken(
-      {uid: "1", some: "arbitrary", data: "here"},
-      {admin: true}
-  );
-
-  response.send('Token' + token)
-});
-
-
 http.createServer(function(request, response) {
     gatewayEndpoint.store(rootFirebase, request);
-    response.send('Profit!');
 }).listen(4444);
