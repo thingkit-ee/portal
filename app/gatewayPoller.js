@@ -66,11 +66,11 @@ var DataScrapper = function() {
 }
 
 exports.init = function (rootFirebase) {
-    //var job = new CronJob('*/10 * * * * *',
-    //    function() {
-    //        console.log("Periodical polling job started: " + new Date());
-    //        var dataScrapper = new DataScrapper();
-    //        dataScrapper.run(rootFirebase);
-    //    }, null, true
-    //);
+    var job = new CronJob('*/10 * * * * *',
+        function() {
+            console.log("Periodical polling job started: " + new Date());
+            var dataScrapper = new DataScrapper();
+            dataScrapper.run(rootFirebase);
+        }, null, true
+    );
 };
