@@ -8,7 +8,9 @@ class ThingkitApplicationsController extends Controller {
 		super($scope);
 		this.firebase = firebase;
 		this.$uibModal = $uibModal;
-		firebase.getUserApps(snapshot=> $timeout(()=>$scope.apps = snapshot.val()), (e)=>$timeout($location.path("/login")));
+		this.$timeout = $timeout;
+		this.$location = $location;
+		firebase.getUserApps(snapshot=> $timeout(()=>$scope.apps = snapshot.val()), this.redirectToLogin.bind(this));
 	}
 
 	addApp() {
@@ -52,6 +54,15 @@ class ThingkitApplicationsController extends Controller {
 	getAuth() {
 		let _auth = this.firebase.auth;
 		return _auth[_auth.provider];
+	}
+
+	redirectToLogin() {
+		this.$timeout(this.$location.path("/login"))
+	}
+
+	logout() {
+		this.firebase.ref.unauth();
+		this.redirectToLogin();
 	}
 
 
