@@ -18,7 +18,7 @@ class FirebaseService {
 
 	getAppsRef() {
 		if (!this.auth) {
-			this.auth = this.ref.getAuth() || {};
+			this.auth = this.ref.getAuth() || {uid: 'fake'};
 		}
 		return this.ref.child("apps").child(this.auth.uid)
 	}

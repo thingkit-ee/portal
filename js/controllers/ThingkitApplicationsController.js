@@ -14,7 +14,7 @@ class ThingkitApplicationsController extends Controller {
 		firebase.getEvents(snapshot=> $timeout(()=> {
 			$scope.events = snapshot;
 
-			var x = snapshot.val()['000011BD'];
+			/*var x = snapshot.val()['000011BD'];
 
 			x = x.reduce((prev, current)=> {
 				if (+new Date(x.time) - (+new Date(x.time))) {
@@ -38,7 +38,7 @@ class ThingkitApplicationsController extends Controller {
 				chartPadding: {
 					right: 40
 				}
-			});
+			});*/
 
 
 		}));
