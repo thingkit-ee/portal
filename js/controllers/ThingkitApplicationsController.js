@@ -86,6 +86,7 @@ class ThingkitApplicationsController extends Controller {
 			if (!node || !node.name) {
 				return;
 			}
+			node.lastReceivedData = new Date();
 			this.firebase.addNodeApp(appId, node)
 		});
 	}
